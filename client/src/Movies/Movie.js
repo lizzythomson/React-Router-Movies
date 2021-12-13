@@ -4,8 +4,11 @@ import { Link, useRouteMatch } from "react-router-dom";
 
 export default function Movie(props) {
   const [movie, setMovie] = useState();
+
   const { movies } = props;
+
   const { id } = useParams();
+
   const activeMovie = movies.find((item) => item.id === parseInt(id));
 
   // Change ^^^ that line and use a hook to obtain the :id parameter from the URL
