@@ -12,6 +12,7 @@ export default function MovieList(props) {
 }
 
 function MovieDetails(props) {
+  const history = useHistory();
   const { title, director, metascore, id } = props.movie;
 
   return (
