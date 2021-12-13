@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Route } from "react-router-dom";
 import SavedList from "./Movies/SavedList";
+import MovieList from "./Movies/MovieList";
 
 export default function App() {
   const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
@@ -14,7 +15,6 @@ export default function App() {
         .then((response) => {
           // Study this response with a breakpoint or log statements
           // and set the response data as the 'movieList' slice of state
-          console.log(response);
           setMovieList(response.data);
         })
         .catch((error) => {
@@ -39,10 +39,11 @@ export default function App() {
       />
 
       <div>
-        <Link to="/">Home</Link>
-        <Link to="/movie-list">Movies</Link>
+        {/* <Link to="/">MovieList</Link> */}
+        <Route exact path="/">
+          <MovieList movies={movieList} />
+        </Route>
         {/* <Route path="/movie-list" component={MovieList} /> */}
-        {/* <Route exact path="/" component={Movie} /> */}
       </div>
     </div>
   );
