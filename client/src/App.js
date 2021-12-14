@@ -27,16 +27,24 @@ export default function App() {
 
   const addToSavedList = (id) => {
     // This is stretch. Prevent the same movie from being "saved" more than once
+    const foundId = saved.find((movieId) => {
+      return movieId === id;
+    });
+    if (foundId === undefined) {
+      setSaved((currentValue) => {
+        return [...currentValue, id];
+      });
+    }
   };
 
+  console.log("saved", saved);
   return (
     <div>
       <SavedList
-        list={
-          [
-            /* This is stretch */
-          ]
-        }
+        list={movieList.filter((movie) => {
+          console.log(saved.includes(movie.id));
+          return saved.includes(String(movie.id));
+        })}
       />
 
       <div>
@@ -45,7 +53,9 @@ export default function App() {
             <MovieList movies={movieList} />
           </Route>
           {/* If you don't have props to pass to the component (shorter verison - doesn't have to be a child) */}
-          <Route path="/movies/:id" component={Movie} />
+          <Route path="/movies/:id">
+            <Movie addToSavedList={addToSavedList} />
+          </Route>
         </Switch>
       </div>
     </div>
